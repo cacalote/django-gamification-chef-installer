@@ -1,0 +1,17 @@
+DEBUG = <%= node['gamification']['debug'] ? "True":"False" %>
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '<%= @database[:name] %>',
+        'USER': '<%= @database[:user] %>',
+        'PASSWORD': '<%= @database[:password] %>',
+        'HOST': '<%= @database[:host] %>',
+        'PORT': '<%= @database[:port] %>',
+        }
+    }
+
+STATIC_ROOT = '<%= node['gamification']['settings']['static_root'] %>'
+STATIC_URL = '<%= node['gamification']['settings']['static_url'] %>'
+
+STATICFILES_DIRS = ('<%= node['gamification']['virtualenv']['location'] %>/local/lib/python2.7/site-packages/django/contrib/admin/static/', '<%= node['gamification']['location'] %>/gamification/static')
+

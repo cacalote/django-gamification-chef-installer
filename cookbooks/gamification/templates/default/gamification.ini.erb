@@ -1,0 +1,38 @@
+[uwsgi]
+
+virtualenv = <%= node['gamification']['virtualenv']['location'] %>
+
+logto = <%= File.join(node['gamification']['logging']['location'] , 'gamification.log') %>
+log-maxsize = 20971520
+
+buffer-size=32768
+
+#uid = www-data
+#gid = www-data
+
+# master
+master                  = true
+#master-as-root          = true
+
+# maximum number of processes
+processes               = 10
+
+# the socket (use the full path to be safe)
+socket          = /tmp/uwsgi.sock
+
+# with appropriate permissions - *may* be needed
+#chmod-socket    = 644
+
+chown-socket    = www-data
+
+# the base directory
+chdir           = <%= node['gamification']['location'] %>
+
+# Django's wsgi file
+module          = gamification.wsgi
+
+# the virtualenv
+home            = <%= node['gamification']['virtualenv']['location'] %>
+
+# clear environment on exit
+vacuum          = true
