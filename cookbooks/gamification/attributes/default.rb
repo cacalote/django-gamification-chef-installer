@@ -2,9 +2,9 @@ default['gamification']['debug'] = true
 default['gamification']['logging']['location'] = '/var/log/gamification'
 default['gamification']['virtualenv']['location'] = '/var/lib/gamification'
 default['gamification']['location'] = '/usr/src/gamification'
-default['gamification']['git_repo']['location'] = 'https://github.com/stephenrjones/django-gamification.git'
+default['gamification']['git_repo']['location'] = 'https://github.com/jaycrossler/django-gamification.git'
 default['gamification']['git_repo']['branch'] = 'master'
-default['postgresql']['password']['postgres'] = 'jds09K32rj80NLKDIU93l3d'
+default['postgresql']['password']['postgres'] = 'django-gamification'
 
 default['postgresql']['version']                         = '9.3'
 default['postgresql']['dir']                             = "/etc/postgresql/9.3/main"
