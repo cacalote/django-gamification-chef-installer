@@ -57,6 +57,7 @@ hostsfile_entry node['gamification']['database']['address'] do
   action :append
 end
 
+include_recipe "gamification::postgresql"
 #include_recipe 'gamification::postgis'
 include_recipe 'gamification::database'
 
