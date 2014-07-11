@@ -21,7 +21,7 @@ git node['gamification']['location'] do
   action :sync
   notifies :run, "execute[install_gamification_dependencies]", :immediately
   notifies :run, "bash[sync_db]"
-  notifies :run, "execute[install_dev_fixtures]"
+  notifies :run, "bash[install_dev_fixtures]"
 end
 
 execute "install_gamification_dependencies" do
@@ -31,8 +31,8 @@ execute "install_gamification_dependencies" do
   user 'root'
 end
 
-execute "install_dev_fixtures" do
-  command "source #{node['gamification']['virtualenv']['location']}/bin/activate && paver install_dev_fixtures"
+bash "install_dev_fixtures" do
+  code "source #{node['gamification']['virtualenv']['location']}/bin/activate && paver install_dev_fixtures"
   cwd node['gamification']['location']
   action :nothing
   user 'root'
@@ -94,7 +94,7 @@ directory "#{node['gamification']['settings']['static_root']}/CACHE/css" do
 end
 
 bash "sync_db" do
-  code "source #{node['gamification']['virtualenv']['location']}/bin/activate && paver sync"
+  code "source #{node['gamification']['virtualenv']['location']}/bin/activate && paver sync_initial"
   cwd "#{node['gamification']['location']}"
   action :nothing
 end
@@ -105,12 +105,6 @@ execute "collect_static" do
   action :nothing
 end
 
-bash "install_fixtures" do
-  code "source #{node['gamification']['virtualenv']['location']}/bin/activate && paver delayed_fixtures"
-  cwd "#{node['gamification']['location']}"
-  user 'postgres'
-  action :nothing
-end
 
 template "gamification_uwsgi_ini" do
   path "#{node['gamification']['virtualenv']['location']}/gamification.ini"
