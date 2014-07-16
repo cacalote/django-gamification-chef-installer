@@ -69,6 +69,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       config.vm.provision :shell, :path => "scripts/link_postgres_dir.sh"
       config.vm.provision :shell, :path => "scripts/install_ruby.sh"
       config.vm.provision :shell, :path => "scripts/install_lessc.sh"
+      config.vm.provision :shell, :path => "scripts/link_badges_images.sh"
 
       config.vm.provision :shell, :inline => "gem install chef --version 11.6.0 --no-rdoc --no-ri --conservative"
 
